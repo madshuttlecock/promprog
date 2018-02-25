@@ -1,0 +1,25 @@
+version: "3.3"
+
+services:
+
+  consumer:
+    build: ./consumer/
+    restart: always
+    tty: true
+    links:
+      - queue
+#      - mongo
+  
+  queue:
+    image: rabbitmq:latest
+    restart: always
+#    tty: true
+    ports:
+        - 5672:5672
+
+  database:
+    image: mongo:latest
+    restart: always
+    ports:
+        - 27017:27017
+
